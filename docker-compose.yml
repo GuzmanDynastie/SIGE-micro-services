@@ -1,11 +1,10 @@
 version: '3.8'
 
 services:
-  user_service:
+  # User Service (3 réplicas)
+  user_service_1:
     build: ./user_service
-    container_name: user_service
-    ports:
-      - "5000:5000"
+    container_name: user_service_1
     env_file:
       - ./user_service/.env
     volumes:
@@ -15,14 +14,36 @@ services:
       - app_network
     restart: always
 
-    
-  ticket_service:
-    build: ./ticket_service
-    container_name: ticket_service
-    ports:
-      - "5100:5100"
+  user_service_2:
+    build: ./user_service
+    container_name: user_service_2
     env_file:
-      - ticket_service/.env
+      - ./user_service/.env
+    volumes:
+      - ./user_service:/app
+      - /app/node_modules
+    networks:
+      - app_network
+    restart: always
+
+  user_service_3:
+    build: ./user_service
+    container_name: user_service_3
+    env_file:
+      - ./user_service/.env
+    volumes:
+      - ./user_service:/app
+      - /app/node_modules
+    networks:
+      - app_network
+    restart: always
+
+  # Ticket Service (3 réplicas)
+  ticket_service_1:
+    build: ./ticket_service
+    container_name: ticket_service_1
+    env_file:
+      - ./ticket_service/.env
     volumes:
       - ./ticket_service:/app
       - /app/node_modules
@@ -30,12 +51,34 @@ services:
       - app_network
     restart: always
 
-  
-  area_service:
+  ticket_service_2:
+    build: ./ticket_service
+    container_name: ticket_service_2
+    env_file:
+      - ./ticket_service/.env
+    volumes:
+      - ./ticket_service:/app
+      - /app/node_modules
+    networks:
+      - app_network
+    restart: always
+
+  ticket_service_3:
+    build: ./ticket_service
+    container_name: ticket_service_3
+    env_file:
+      - ./ticket_service/.env
+    volumes:
+      - ./ticket_service:/app
+      - /app/node_modules
+    networks:
+      - app_network
+    restart: always
+
+  # Area Service (3 réplicas)
+  area_service_1:
     build: ./area_service
-    container_name: area_service
-    ports:
-      - "5200:5200"
+    container_name: area_service_1
     env_file:
       - ./area_service/.env
     volumes:
@@ -45,12 +88,34 @@ services:
       - app_network
     restart: always
 
+  area_service_2:
+    build: ./area_service
+    container_name: area_service_2
+    env_file:
+      - ./area_service/.env
+    volumes:
+      - ./area_service:/app
+      - /app/node_modules
+    networks:
+      - app_network
+    restart: always
 
-  loan_service:
+  area_service_3:
+    build: ./area_service
+    container_name: area_service_3
+    env_file:
+      - ./area_service/.env
+    volumes:
+      - ./area_service:/app
+      - /app/node_modules
+    networks:
+      - app_network
+    restart: always
+
+  # Loan Service (3 réplicas)
+  loan_service_1:
     build: ./loan_service
-    container_name: loan_service
-    ports:
-      - "5300:5300"
+    container_name: loan_service_1
     env_file:
       - ./loan_service/.env
     volumes:
@@ -60,12 +125,34 @@ services:
       - app_network
     restart: always
 
+  loan_service_2:
+    build: ./loan_service
+    container_name: loan_service_2
+    env_file:
+      - ./loan_service/.env
+    volumes:
+      - ./loan_service:/app
+      - /app/node_modules
+    networks:
+      - app_network
+    restart: always
 
-  subnets_service:
+  loan_service_3:
+    build: ./loan_service
+    container_name: loan_service_3
+    env_file:
+      - ./loan_service/.env
+    volumes:
+      - ./loan_service:/app
+      - /app/node_modules
+    networks:
+      - app_network
+    restart: always
+
+  # Subnets Service (3 réplicas)
+  subnets_service_1:
     build: ./subnets_service
-    container_name: subnets_service
-    ports:
-      - "5400:5400"
+    container_name: subnets_service_1
     env_file:
       - ./subnets_service/.env
     volumes:
@@ -75,12 +162,34 @@ services:
       - app_network
     restart: always
 
-  
-  real_state_service:
+  subnets_service_2:
+    build: ./subnets_service
+    container_name: subnets_service_2
+    env_file:
+      - ./subnets_service/.env
+    volumes:
+      - ./subnets_service:/app
+      - /app/node_modules
+    networks:
+      - app_network
+    restart: always
+
+  subnets_service_3:
+    build: ./subnets_service
+    container_name: subnets_service_3
+    env_file:
+      - ./subnets_service/.env
+    volumes:
+      - ./subnets_service:/app
+      - /app/node_modules
+    networks:
+      - app_network
+    restart: always
+
+  # Real State Service (3 réplicas)
+  real_state_service_1:
     build: ./real_state_service
-    container_name: real_state_service
-    ports:
-      - "5500:5500"
+    container_name: real_state_service_1
     env_file:
       - ./real_state_service/.env
     volumes:
@@ -90,12 +199,34 @@ services:
       - app_network
     restart: always
 
+  real_state_service_2:
+    build: ./real_state_service
+    container_name: real_state_service_2
+    env_file:
+      - ./real_state_service/.env
+    volumes:
+      - ./real_state_service:/app
+      - /app/node_modules
+    networks:
+      - app_network
+    restart: always
 
-  notifications_service:
+  real_state_service_3:
+    build: ./real_state_service
+    container_name: real_state_service_3
+    env_file:
+      - ./real_state_service/.env
+    volumes:
+      - ./real_state_service:/app
+      - /app/node_modules
+    networks:
+      - app_network
+    restart: always
+
+  # Notifications Service (3 réplicas)
+  notifications_service_1:
     build: ./notifications_service
-    container_name: notifications_service
-    ports:
-      - "5601:5601"
+    container_name: notifications_service_1
     env_file:
       - ./notifications_service/.env
     volumes:
@@ -105,6 +236,66 @@ services:
       - app_network
     restart: always
 
+  notifications_service_2:
+    build: ./notifications_service
+    container_name: notifications_service_2
+    env_file:
+      - ./notifications_service/.env
+    volumes:
+      - ./notifications_service:/app
+      - /app/node_modules
+    networks:
+      - app_network
+    restart: always
+
+  notifications_service_3:
+    build: ./notifications_service
+    container_name: notifications_service_3
+    env_file:
+      - ./notifications_service/.env
+    volumes:
+      - ./notifications_service:/app
+      - /app/node_modules
+    networks:
+      - app_network
+    restart: always
+
+  # NGINX Load Balancer
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/certs:/etc/nginx/certs
+      - ./nginx/logs:/var/log/nginx
+    depends_on:
+      - user_service_1
+      - user_service_2
+      - user_service_3
+      - ticket_service_1
+      - ticket_service_2
+      - ticket_service_3
+      - area_service_1
+      - area_service_2
+      - area_service_3
+      - loan_service_1
+      - loan_service_2
+      - loan_service_3
+      - subnets_service_1
+      - subnets_service_2
+      - subnets_service_3
+      - real_state_service_1
+      - real_state_service_2
+      - real_state_service_3
+      - notifications_service_1
+      - notifications_service_2
+      - notifications_service_3
+    networks:
+      - app_network
+    restart: unless-stopped
 
 networks:
   app_network:
