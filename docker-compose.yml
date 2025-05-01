@@ -1,0 +1,111 @@
+version: '3.8'
+
+services:
+  user_service:
+    build: ./user_service
+    container_name: user_service
+    ports:
+      - "5000:5000"
+    env_file:
+      - ./user_service/.env
+    volumes:
+      - ./user_service:/app
+      - /app/node_modules
+    networks:
+      - app_network
+    restart: always
+
+    
+  ticket_service:
+    build: ./ticket_service
+    container_name: ticket_service
+    ports:
+      - "5100:5100"
+    env_file:
+      - ticket_service/.env
+    volumes:
+      - ./ticket_service:/app
+      - /app/node_modules
+    networks:
+      - app_network
+    restart: always
+
+  
+  area_service:
+    build: ./area_service
+    container_name: area_service
+    ports:
+      - "5200:5200"
+    env_file:
+      - ./area_service/.env
+    volumes:
+      - ./area_service:/app
+      - /app/node_modules
+    networks:
+      - app_network
+    restart: always
+
+
+  loan_service:
+    build: ./loan_service
+    container_name: loan_service
+    ports:
+      - "5300:5300"
+    env_file:
+      - ./loan_service/.env
+    volumes:
+      - ./loan_service:/app
+      - /app/node_modules
+    networks:
+      - app_network
+    restart: always
+
+
+  subnets_service:
+    build: ./subnets_service
+    container_name: subnets_service
+    ports:
+      - "5400:5400"
+    env_file:
+      - ./subnets_service/.env
+    volumes:
+      - ./subnets_service:/app
+      - /app/node_modules
+    networks:
+      - app_network
+    restart: always
+
+  
+  real_state_service:
+    build: ./real_state_service
+    container_name: real_state_service
+    ports:
+      - "5500:5500"
+    env_file:
+      - ./real_state_service/.env
+    volumes:
+      - ./real_state_service:/app
+      - /app/node_modules
+    networks:
+      - app_network
+    restart: always
+
+
+  notifications_service:
+    build: ./notifications_service
+    container_name: notifications_service
+    ports:
+      - "5601:5601"
+    env_file:
+      - ./notifications_service/.env
+    volumes:
+      - ./notifications_service:/app
+      - /app/node_modules
+    networks:
+      - app_network
+    restart: always
+
+
+networks:
+  app_network:
+    driver: bridge
